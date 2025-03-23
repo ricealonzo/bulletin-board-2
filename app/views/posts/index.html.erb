@@ -13,44 +13,49 @@
     <h2>
       Add a new post
     </h2>
+    <% if current_user == nil %>
+      <p>You Must <a href="/users/sign_in"> Sign In</a>  to Add Post </p>
+    <% else %>
 
-    <form action="/insert_post" method="post">
-      <div>
-        <label for="title_box">
-          Title
-        </label>
+      <form action="/insert_post" method="post">
+        <div>
+          <label for="title_box">
+            Title
+          </label>
 
-        <input type="text" id="title_box" name="query_title">
-      </div>
+          <input type="text" id="title_box" name="query_title">
+        </div>
 
-      <div>
-        <label for="body_box">
-          Body
-        </label>
+        <div>
+          <label for="body_box">
+            Body
+          </label>
 
-        <textarea id="body_box" name="query_body" rows="3"></textarea>
-      </div>
+          <textarea id="body_box" name="query_body" rows="3"></textarea>
+        </div>
 
-      <div>
-        <label for="expires_on_box">
-          Expires on
-        </label>
+        <div>
+          <label for="expires_on_box">
+            Expires on
+          </label>
 
-        <input type="date" id="expires_on_box" name="query_expires_on">
-      </div>
+          <input type="date" id="expires_on_box" name="query_expires_on">
+        </div>
 
-      <div>
-        <label for="board_id_box">
-          Board
-        </label>
+        <div>
+          <label for="board_id_box">
+            Board
+          </label>
 
-        <input type="text" id="board_id_box" name="query_board_id">
-      </div>
+          <input type="text" id="board_id_box" name="query_board_id">
+        </div>
 
-      <button>
-        Create post
-      </button>
-    </form>
+        <button>
+          Create post
+        </button>
+        <a href="user"></a>
+      </form>
+    <% end %>
   </div>
 </div>
 
@@ -92,40 +97,46 @@
       </tr>
 
       <% @list_of_posts.each do |a_post| %>
-      <tr>
-        <td>
-          <%= a_post.id %>
-        </td>
+        <tr>
+          <td>
+            <%= a_post.id %>
+          </td>
 
-        <td>
-          <%= a_post.title %>
-        </td>
+          <td>
+            <%= a_post.title %>
+          </td>
 
-        <td>
-          <%= a_post.body %>
-        </td>
+          <td>
+            <%= a_post.body %>
+          </td>
 
-        <td>
-          <%= a_post.expires_on %>
-        </td>
+          <td>
+            <%= a_post.expires_on %>
+          </td>
 
-        <td>
-          <%= a_post.board_id %>
-        </td>
+          <td>
+            <%= a_post.board_id %>
+          </td>
 
-        <td>
-          <%= time_ago_in_words(a_post.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_post.updated_at) %> ago
-        </td>
+          <td>
+            <%= time_ago_in_words(a_post.created_at) %> ago
+          </td>
+          <td>
+            <%= time_ago_in_words(a_post.updated_at) %> ago
+          </td>
 
-        <td>
-          <a href="/posts/<%= a_post.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
+          <td>
+            <a href="/posts/<%= a_post.id %>">
+              Show details
+            </a>
+          </td>
+
+          <td>
+            <a href="/posts/<%= a_post.id %>">
+              Show details
+            </a>
+          </td>
+        </tr>
       <% end %>
     </table>
   </div>
